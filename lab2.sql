@@ -1,8 +1,18 @@
+create database university1
 
+use university1
 
 create table groups(
 group_no char(20) primary key
 )
+
+create table students (
+student_id int identity primary key,
+surname varchar(30) not null,
+first_name varchar(25),
+date_of_birth date,
+group_no char(20),
+);
 
 alter table students add
 constraint rgs foreign key(group_no) references groups(group_no)
