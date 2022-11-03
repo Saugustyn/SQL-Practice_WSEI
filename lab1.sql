@@ -5,8 +5,8 @@ salary decimal(8,2) check (salary>0),
 employment_date date default getdate(),
 pesel char(11) not null unique,
 date_of_birth date check(date_of_birth<=getdate())
-
 )
+
 create index employee_name_index on employees1(employee_name)
 
 create table sprzedaz(
