@@ -98,11 +98,85 @@ SELECT COUNT(*) FROM student_grades
 SELECT TOP 20 PERCENT * FROM student_grades
 ORDER BY exam_date
 
+--c)
+SELECT * FROM student_grades
+ORDER BY exam_date ASC
+OFFSET 6 ROWS 
+FETCH NEXT 10 ROWS ONLY
 
+--d)
+SELECT * FROM student_grades
+ORDER BY exam_date ASC
+OFFSET 20 ROWS
 
 --11.13
+--a)
+SELECT surname FROM students
+UNION
+SELECT surname FROM employees
+ORDER BY surname
+
+--b)
+SELECT * FROM students
+UNION ALL
+SELECT * FROM employees
+ORDER BY surname
+
+--c)
+SELECT surname
+FROM students
+EXCEPT
+SELECT surname
+FROM employees
+ORDER BY surname
+
+--d)
+SELECT surname
+FROM students
+INTERSECT
+SELECT surname
+FROM employees
+ORDER BY surname
+
+
+--e)
+SELECT department
+FROM departments
+EXCEPT
+SELECT department
+FROM modules
+
+
+--f)
+SELECT module_id
+FROM modules
+EXCEPT
+SELECT preceding_module
+FROM modules
+
+
 --g)
 SELECT student_id, module_id FROM students_modules
-EXCEPT --r�nica
+EXCEPT --ró¿nica
 SELECT student_id, module_id FROM student_grades
+
+--h)
+SELECT student_id
+FROM students_modules
+WHERE module_id=3
+INTERSECT
+SELECT student_id
+FROM students_modules
+WHERE module_id=12
+
+
+--i)
+SELECT surname, first_name, group_no AS group_department
+FROM students
+WHERE group_no LIKE 'DMIe%'
+UNION
+SELECT surname, first_name, department
+FROM lecturers INNER JOIN employees ON lecturer_id=employee_id
+ORDER BY group_department
+
 
