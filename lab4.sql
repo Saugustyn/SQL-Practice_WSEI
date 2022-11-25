@@ -106,29 +106,39 @@ LEFT JOIN employees e ON e.employee_id = l.lecturer_id
 WHERE m.module_name collate polish_CS_as LIKE 'Computer%'
 ORDER BY e.surname
 
---12.19 TODO!
+--12.19
 SELECT s.student_id, s.first_name, S.surname, sg.grade, m.module_name FROM students s
-LEFT JOIN students_modules sm ON sm.student_id = sm.student_id
-LEFT JOIN modules m ON m.module_id = sm.module_id
+JOIN students_modules sm ON sm.student_id = s.student_id
+JOIN modules m ON m.module_id = sm.module_id
 LEFT JOIN student_grades sg ON sg.student_id = sm.student_id
+AND sm.module_id = sg.module_id
 WHERE sg.student_id IS NULL
 ORDER BY s.student_id ASC
 
---12.20 TODO!
-
+--12.20
+SELECT s.student_id, s.first_name, S.surname, sg.grade, m.module_name FROM students s
+JOIN students_modules sm ON sm.student_id = s.student_id
+JOIN modules m ON m.module_id = sm.module_id
+JOIN student_grades sg ON sg.student_id = sm.student_id
+AND sm.module_id = sg.module_id
+ORDER BY s.student_id ASC
 
 --12.21
 SELECT m.module_name FROM modules m
 LEFT JOIN lecturers l ON m.lecturer_id = l.lecturer_id
 WHERE m.department != l.department
 
---12.22 TODO!
-SELECT e.surname, e.first_name, e.PESEL, 'wykladowca' AS Role FROM employees e
-JOIN modules m ON m.lecturer_id = e.employee_id
-SELECT s.surname, s.first_name, s.group_no  FROM students s
-LEFT JOIN students_modules sm ON sm.student_id = s.student_id
-LEFT JOIN modules m ON m.module_id = sm.module_id
-
+-- 12.22
+select e.surname, e.first_name, e.PESEL, m.module_name, 'wykładowca' as siema
+from lecturers l
+LEFT join employees e on l.lecturer_id = e.employee_id
+INNER join modules m on l.lecturer_id = m.lecturer_id
+union
+select s.surname, s.first_name, s.group_no, m.module_name, 'student' as siema
+from students s
+LEFT join students_modules sm on s.student_id = sm.student_id
+LEFT join modules m on sm.module_id = m.module_id
+order by m.module_name asc, siema asc
 
 
 
