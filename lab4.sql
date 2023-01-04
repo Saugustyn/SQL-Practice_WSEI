@@ -141,6 +141,3 @@ LEFT join modules m on sm.module_id = m.module_id
 order by m.module_name asc, siema asc
 
 
-XDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDD
-https://www.pracuj.pl/praca/programista-programistka-c%23-krakow,oferta,1002186276?s=c62297a&searchId=MTY2OTgwOTQ0MDUxMi4zMTA1
-
